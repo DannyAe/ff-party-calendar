@@ -176,8 +176,8 @@
 
   <!-- Monthly note -->
   <div class="monthly-note" style="margin-top:16px;">
-    <div class="monthly-note-icon">📅</div>
-    <div class="monthly-note-text"><strong>Alter Ego Fetish Party</strong> — every 2nd Saturday of the month at premier alt-lifestyle clubs in the Ft. Lauderdale area. Tickets available in-store, online, or at the door.</div>
+    <div class="monthly-note-icon">🏆</div>
+    <div class="monthly-note-text"><strong>South Florida's largest &amp; longest-running strict dress code fetish party</strong> — we host the Alter Ego Fetish Party every 2nd weekend of the month at premier alt-lifestyle clubs in the Ft. Lauderdale area. Tickets available in-store, online, or at the door.</div>
   </div>
 
   <!-- FILTER -->
@@ -185,7 +185,6 @@
     <div class="filter-bar">
       <button class="filter-btn active" data-filter="all">All Events</button>
       <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-      <button class="filter-btn" data-filter="past">Past</button>
     </div>
   </div>
 
@@ -279,57 +278,6 @@
         </div>
         <div class="card-actions">
           <a href="https://fetishfactory.com" class="btn-outline" target="_blank">fetishfactory.com</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── PAST ────────────────────────────────── -->
-    <div class="section-label" id="label-past">Past Events</div>
-
-    <!-- XFP – March 28, 2026 -->
-    <div class="party-card past" data-status="past" data-date="2026-03-28">
-      <a href="https://fetishfactory.com/xtreme-fetish-party" class="card-img-wrap" target="_blank" rel="noopener">
-        <div class="card-img-placeholder">XFP</div>
-        <div class="date-badge">Mar 28</div>
-        <div class="status-pill past-pill">Past</div>
-      </a>
-      <div class="card-body">
-        <div class="card-meta">Saturday, March 28, 2026 · 10PM – 3AM</div>
-        <div class="card-title">XFP</div>
-        <div class="card-subtitle">Xtreme Fetish Party · Peppermint Hippo</div>
-        <div class="card-venue">📍 1350 SW 2nd St, Pompano Beach</div>
-        <div class="card-desc">An intimate, vetted fetish experience capped at 150 tickets. Vetting required via FetLife, WhatsApp, SDC, or email. DJs Ray Milian &amp; Tumbles.</div>
-        <div class="price-row">
-          <span class="price-chip lo">$30 · Showroom</span>
-          <span class="price-chip lo">$40 · Online</span>
-          <span class="price-chip lo">$50 · Door</span>
-        </div>
-        <div class="tag-row">
-          <span class="tag tag-red">Strict Dress Code</span>
-          <span class="tag tag-grey">Vetted Entry</span>
-          <span class="tag tag-grey">150 Max</span>
-        </div>
-        <div class="card-actions">
-          <a href="https://fetishfactory.com/xtreme-fetish-party" class="btn-outline" target="_blank">More Info</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- HAUS OF WHACKS – March 14, 2026 -->
-    <div class="party-card past" data-status="past" data-date="2026-03-14">
-      <a href="https://fetishfactory.com/haus-of-whacks/" class="card-img-wrap" target="_blank" rel="noopener">
-        <div class="card-img-placeholder">Haus of Whacks</div>
-        <div class="date-badge">Mar 14</div>
-        <div class="status-pill past-pill">Past</div>
-      </a>
-      <div class="card-body">
-        <div class="card-meta">Saturday, March 14, 2026</div>
-        <div class="card-title">Haus of Whacks</div>
-        <div class="card-subtitle">Fetish Party · Aquaplex FTL</div>
-        <div class="card-venue">📍 1421 E Oakland Park Blvd, Fort Lauderdale</div>
-        <div class="card-desc">Industrial, coldwave, futurepop &amp; aggrotech — hard beats and dark energy inside Aquaplex FTL.</div>
-        <div class="card-actions">
-          <a href="https://fetishfactory.com/haus-of-whacks/" class="btn-outline" target="_blank">More Info</a>
         </div>
       </div>
     </div>
@@ -475,9 +423,7 @@
         card.classList.toggle('hidden', f !== 'all' && card.dataset.status !== f);
       });
       const up = [...document.querySelectorAll('.party-card[data-status="upcoming"]')].some(c => !c.classList.contains('hidden'));
-      const ps = [...document.querySelectorAll('.party-card[data-status="past"]')].some(c => !c.classList.contains('hidden'));
       document.getElementById('label-upcoming').style.display = up ? '' : 'none';
-      document.getElementById('label-past').style.display = ps ? '' : 'none';
     });
   });
 
