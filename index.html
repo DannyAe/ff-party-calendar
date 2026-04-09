@@ -7,36 +7,46 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --neon: #C8FF00;
-    --neon-dim: rgba(200,255,0,0.12);
-    --neon-glow: rgba(200,255,0,0.35);
-    --dark: #0A0A0A;
-    --card: #141414;
-    --card-border: #1E1E1E;
-    --surface: #1A1A1A;
-    --text: #E8E8E8;
-    --text-dim: #666;
-    --text-mid: #AAAAAA;
-    --danger: #FF3B3B;
-    --white: #FFFFFF;
+    --red: #CC0000;
+    --red-dim: rgba(204,0,0,0.08);
+    --red-glow: rgba(204,0,0,0.25);
+    --bg: #FFFFFF;
+    --card: #F7F7F7;
+    --card-border: #E0E0E0;
+    --surface: #EEEEEE;
+    --text: #111111;
+    --text-dim: #888888;
+    --text-mid: #444444;
+    --danger: #CC0000;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  body { font-family:'Barlow',sans-serif; background:var(--dark); color:var(--text); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+  body { font-family:'Barlow',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 
   /* HEADER */
-  .header { position:sticky; top:0; z-index:100; background:rgba(10,10,10,0.96); backdrop-filter:blur(20px); border-bottom:1px solid var(--card-border); padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .header-logo img { height:30px; width:auto; display:block; }
+  .header { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(20px); border-bottom:2px solid var(--red); padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .header-logo img { height:30px; width:auto; display:block; filter:brightness(0); }
   .header-right { display:flex; flex-direction:column; align-items:flex-end; gap:1px; }
-  .header-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:15px; text-transform:uppercase; letter-spacing:2px; color:var(--white); }
+  .header-title { font-family:'Oswald',sans-serif; font-weight:700; font-size:15px; text-transform:uppercase; letter-spacing:2px; color:var(--text); }
   .header-sub { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-dim); }
+
+  /* TABS */
+  .tabs { display:flex; overflow-x:auto; scrollbar-width:none; border-bottom:1px solid var(--card-border); background:var(--bg); }
+  .tabs::-webkit-scrollbar { display:none; }
+  .tab { flex-shrink:0; padding:12px 18px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-dim); background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .tab.active { color:var(--red); border-bottom-color:var(--red); }
+  .tab:hover { color:var(--text); }
+
+  /* PANELS */
+  .panel { display:none; }
+  .panel.active { display:block; }
 
   /* FILTER */
   .filter-wrap { padding:14px 16px 0; }
   .filter-bar { display:flex; gap:7px; overflow-x:auto; scrollbar-width:none; padding-bottom:14px; }
   .filter-bar::-webkit-scrollbar { display:none; }
   .filter-btn { flex-shrink:0; padding:7px 18px; border-radius:20px; border:1px solid var(--card-border); background:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-dim); cursor:pointer; transition:all .2s; }
-  .filter-btn.active { background:var(--neon-dim); border-color:rgba(200,255,0,.5); color:var(--neon); }
+  .filter-btn.active { background:var(--red-dim); border-color:rgba(204,0,0,.4); color:var(--red); }
 
   /* CARDS WRAP */
   .cards-wrap { padding:0 16px; }
@@ -45,9 +55,15 @@
   .section-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:3px; color:var(--text-dim); padding:4px 2px 10px; display:flex; align-items:center; gap:10px; }
   .section-label::after { content:''; flex:1; height:1px; background:var(--card-border); }
 
+  /* MONTHLY NOTE */
+  .monthly-note { background:var(--red-dim); border:1px solid rgba(204,0,0,.2); border-radius:14px; padding:14px 16px; margin:0 16px 14px; display:flex; align-items:flex-start; gap:10px; }
+  .monthly-note-icon { font-size:18px; flex-shrink:0; }
+  .monthly-note-text { font-family:'Barlow',sans-serif; font-size:13px; color:var(--text); line-height:1.5; }
+  .monthly-note-text strong { color:var(--red); }
+
   /* PARTY CARD */
   .party-card { background:var(--card); border:1px solid var(--card-border); border-radius:18px; overflow:hidden; margin-bottom:14px; transition:opacity .3s, filter .3s; }
-  .party-card.featured { border-color:rgba(200,255,0,.25); box-shadow:0 0 0 1px rgba(200,255,0,.07), 0 8px 40px rgba(0,0,0,.5); }
+  .party-card.featured { border-color:rgba(204,0,0,.3); box-shadow:0 0 0 1px rgba(204,0,0,.08), 0 4px 20px rgba(0,0,0,.06); }
   .party-card.past { opacity:.45; filter:grayscale(70%); }
   .party-card.hidden { display:none; }
 
@@ -56,51 +72,82 @@
   .card-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
   .card-img-wrap:hover img { transform:scale(1.03); }
   .card-img-placeholder { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-weight:700; font-size:18px; text-transform:uppercase; letter-spacing:3px; color:var(--card-border); }
-  .contain-img img { object-fit:contain; padding:24px; background:#0D0D0D; }
+  .contain-img img { object-fit:contain; padding:24px; background:var(--surface); }
+
+  /* COMING SOON IMAGE PLACEHOLDER */
+  .coming-soon-img { width:100%; aspect-ratio:2/1; background:linear-gradient(135deg,#F5F5F5,#FFE8E8); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; position:relative; }
+  .coming-soon-img-icon { font-size:32px; }
+  .coming-soon-img-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--text-dim); }
+  .coming-soon-banner { background:var(--red-dim); border-top:1px solid rgba(204,0,0,.2); padding:9px 14px; display:flex; align-items:center; gap:8px; }
+  .coming-soon-banner span { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); }
 
   /* BADGES */
-  .date-badge { position:absolute; top:12px; left:12px; background:var(--neon); color:var(--dark); font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.5px; padding:5px 12px; border-radius:8px; line-height:1.2; z-index:2; }
+  .date-badge { position:absolute; top:12px; left:12px; background:var(--red); color:#FFFFFF; font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.5px; padding:5px 12px; border-radius:8px; line-height:1.2; z-index:2; }
   .status-pill { position:absolute; top:12px; right:12px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:1.5px; padding:4px 11px; border-radius:20px; z-index:2; }
-  .status-pill.soon { background:var(--neon); color:var(--dark); animation:breathe 2s ease-in-out infinite; }
-  .status-pill.upcoming-pill { background:rgba(200,255,0,.12); border:1px solid rgba(200,255,0,.35); color:var(--neon); }
-  .status-pill.past-pill { background:rgba(255,255,255,.06); color:var(--text-dim); border:1px solid var(--card-border); }
-  @keyframes breathe { 0%,100%{opacity:1;box-shadow:0 0 8px rgba(200,255,0,.5)} 50%{opacity:.8;box-shadow:0 0 18px rgba(200,255,0,.8)} }
+  .status-pill.soon { background:var(--red); color:#FFFFFF; animation:breathe 2s ease-in-out infinite; }
+  .status-pill.upcoming-pill { background:var(--red-dim); border:1px solid rgba(204,0,0,.35); color:var(--red); }
+  .status-pill.past-pill { background:rgba(0,0,0,.06); color:var(--text-dim); border:1px solid var(--card-border); }
+  @keyframes breathe { 0%,100%{opacity:1;box-shadow:0 0 8px rgba(204,0,0,.4)} 50%{opacity:.85;box-shadow:0 0 18px rgba(204,0,0,.7)} }
 
   /* CARD BODY */
   .card-body { padding:18px 18px 20px; }
-  .card-meta { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--neon); margin-bottom:4px; }
-  .card-title { font-family:'Oswald',sans-serif; font-weight:700; font-size:28px; text-transform:uppercase; color:var(--white); line-height:1; margin-bottom:3px; }
+  .card-meta { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red); margin-bottom:4px; }
+  .card-title { font-family:'Oswald',sans-serif; font-weight:700; font-size:28px; text-transform:uppercase; color:var(--text); line-height:1; margin-bottom:3px; }
   .card-subtitle { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--text-dim); margin-bottom:10px; }
   .card-venue { font-family:'Barlow',sans-serif; font-size:13px; color:var(--text-mid); margin-bottom:10px; line-height:1.4; }
-  .card-desc { font-family:'Barlow',sans-serif; font-weight:300; font-size:13px; color:var(--text-dim); line-height:1.65; margin-bottom:14px; }
+  .card-desc { font-family:'Barlow',sans-serif; font-weight:400; font-size:13px; color:var(--text-dim); line-height:1.65; margin-bottom:14px; }
 
   /* PRICES */
   .price-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
   .price-chip { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:1px; padding:4px 10px; border-radius:20px; white-space:nowrap; }
-  .price-chip.hi { background:var(--neon-dim); border:1px solid rgba(200,255,0,.3); color:var(--neon); }
+  .price-chip.hi { background:var(--red-dim); border:1px solid rgba(204,0,0,.3); color:var(--red); }
   .price-chip.lo { background:var(--surface); border:1px solid var(--card-border); color:var(--text-mid); }
 
   /* TAGS */
   .tag-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
   .tag { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:1px; padding:3px 9px; border-radius:20px; }
-  .tag-red { background:rgba(255,59,59,.13); color:#FF3B3B; }
-  .tag-white { background:rgba(255,255,255,.07); color:var(--text-mid); }
+  .tag-red { background:rgba(204,0,0,.1); color:var(--red); }
+  .tag-grey { background:rgba(0,0,0,.06); color:var(--text-mid); border:1px solid var(--card-border); }
 
   /* ACTIONS */
   .card-actions { display:flex; gap:8px; }
   .btn-outline { flex:1; padding:13px 10px; background:transparent; border:1px solid var(--card-border); color:var(--text-mid); font-family:'Oswald',sans-serif; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:1.5px; text-align:center; text-decoration:none; border-radius:10px; transition:all .2s; display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .btn-outline:active { background:var(--surface); }
-  .btn-neon { flex:1.6; padding:13px 10px; background:var(--neon); color:var(--dark); font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:1.5px; text-align:center; text-decoration:none; border-radius:10px; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:5px; }
-  .btn-neon:active { transform:scale(.97); opacity:.9; }
+  .btn-red { flex:1.6; padding:13px 10px; background:var(--red); color:#FFFFFF; font-family:'Oswald',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:1.5px; text-align:center; text-decoration:none; border-radius:10px; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:5px; }
+  .btn-red:active { transform:scale(.97); opacity:.9; }
+  .btn-bottle { display:block; width:100%; padding:14px; background:var(--red); color:#FFFFFF; font-family:'Oswald',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:2px; text-align:center; text-decoration:none; border-radius:12px; border:none; cursor:pointer; transition:all .2s; margin:16px 0 4px; }
+  .btn-bottle:active { transform:scale(.97); }
 
-  /* EMPTY STATE */
-  .empty-state { text-align:center; padding:48px 20px; }
-  .empty-state p { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:2px; color:var(--text-dim); }
+  /* INFO CARDS (Etiquette / FAQ) */
+  .info-panel { padding:16px; }
+  .info-card { background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:16px 18px; margin-bottom:10px; }
+  .info-card-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:16px; text-transform:uppercase; color:var(--text); margin-bottom:8px; }
+  .info-card p { font-family:'Barlow',sans-serif; font-size:13px; color:var(--text-mid); line-height:1.65; margin-bottom:6px; }
+  .info-card p:last-child { margin-bottom:0; }
+  .info-card p strong { color:var(--text); }
+  .info-section-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:3px; color:var(--text-dim); padding:6px 2px 10px; display:flex; align-items:center; gap:10px; margin-top:6px; }
+  .info-section-label::after { content:''; flex:1; height:1px; background:var(--card-border); }
+
+  /* WARN CARD */
+  .warn-card { background:rgba(204,0,0,.06); border:1px solid rgba(204,0,0,.2); border-radius:14px; padding:14px 16px; margin-bottom:14px; display:flex; align-items:flex-start; gap:10px; }
+  .warn-card-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+  .warn-card-text { font-family:'Barlow',sans-serif; font-weight:500; font-size:13px; color:var(--text); line-height:1.5; }
+  .warn-card-text strong { color:var(--red); }
+
+  /* FAQ */
+  .faq-item { background:var(--card); border:1px solid var(--card-border); border-radius:12px; margin-bottom:8px; overflow:hidden; }
+  .faq-q { padding:15px 18px; font-family:'Barlow',sans-serif; font-weight:600; font-size:14px; color:var(--text); cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px; background:none; border:none; width:100%; text-align:left; }
+  .faq-arrow { font-size:11px; color:var(--red); transition:transform .2s; flex-shrink:0; }
+  .faq-item.open .faq-arrow { transform:rotate(180deg); }
+  .faq-a { padding:0 18px; max-height:0; overflow:hidden; transition:max-height .3s ease,padding .3s ease; }
+  .faq-item.open .faq-a { max-height:400px; padding:0 18px 15px; }
+  .faq-a p { font-family:'Barlow',sans-serif; font-size:13px; color:var(--text-mid); line-height:1.6; }
+  .faq-a a { color:var(--red); }
 
   /* FOOTER */
   .footer { text-align:center; padding:24px 20px 48px; border-top:1px solid var(--card-border); margin:8px 16px 0; }
   .footer a { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--text-dim); text-decoration:none; }
-  .footer a:hover { color:var(--neon); }
+  .footer a:hover { color:var(--red); }
   .footer-sep { color:var(--card-border); margin:0 10px; }
 </style>
 </head>
@@ -117,132 +164,286 @@
   </div>
 </div>
 
-<!-- FILTER -->
-<div class="filter-wrap">
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All Events</button>
-    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-    <button class="filter-btn" data-filter="past">Past</button>
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" data-tab="events">Events</button>
+  <button class="tab" data-tab="etiquette">Etiquette</button>
+  <button class="tab" data-tab="faq">FAQ</button>
+</div>
+
+<!-- ══ EVENTS PANEL ══════════════════════════════════════════ -->
+<div class="panel active" id="events">
+
+  <!-- Monthly note -->
+  <div class="monthly-note" style="margin-top:16px;">
+    <div class="monthly-note-icon">📅</div>
+    <div class="monthly-note-text"><strong>Alter Ego Fetish Party</strong> — every 2nd Saturday of the month at premier alt-lifestyle clubs in the Ft. Lauderdale area. Tickets available in-store, online, or at the door.</div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-wrap">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Events</button>
+      <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+      <button class="filter-btn" data-filter="past">Past</button>
+    </div>
+  </div>
+
+  <div class="cards-wrap">
+
+    <!-- ── UPCOMING ────────────────────────────── -->
+    <div class="section-label" id="label-upcoming">Upcoming</div>
+
+    <!-- BLASFFEMY – April 11, 2026 -->
+    <div class="party-card featured" data-status="upcoming" data-date="2026-04-11">
+      <a href="https://fetishfactory.com/blasffemy-april-11-2026/" class="card-img-wrap" target="_blank" rel="noopener">
+        <img src="https://fetishfactory.com/wp-content/uploads/2026/03/BLASFFEMY2026_slider1200x600_DAN.png" alt="BLASFFEMY 2026">
+        <div class="date-badge">Apr 11</div>
+        <div class="status-pill soon" id="blasffemy-pill">● Soon</div>
+      </a>
+      <div class="card-body">
+        <div class="card-meta">Saturday, April 11, 2026 · 10PM – 3AM</div>
+        <div class="card-title">BLASFFEMY</div>
+        <div class="card-subtitle">Fetish Party · Aquaplex FTL</div>
+        <div class="card-venue">📍 1421 E Oakland Park Blvd, Fort Lauderdale</div>
+        <div class="card-desc">The un-sacred church rises again — a night of dark energy, bold expression, and immersive atmosphere. DJs Ray Milian, Sideshow &amp; Jorg Barr. Performers: Lyra Angels &amp; Foxxy Lane LeFevre.</div>
+        <div class="price-row">
+          <span class="price-chip hi">$25 · Showroom</span>
+          <span class="price-chip hi">$35 · Online</span>
+          <span class="price-chip lo">$40 · Door</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag tag-red">Strict Dress Code</span>
+          <span class="tag tag-grey">Bottle Service</span>
+          <span class="tag tag-grey">Scene Security</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://fetishfactory.com/blasffemy-april-11-2026/" class="btn-outline" target="_blank">More Info</a>
+          <a href="https://alteregoeventsllc.ticketspice.com/04-11-2026-blasffemy-alter-ego-party" class="btn-red" target="_blank">🎟 Buy Tickets</a>
+        </div>
+        <a href="mailto:hello@alteregoparty.com?subject=Bottle Service - BLASFFEMY April 11" class="btn-bottle">🍾 Reserve Bottle Service</a>
+      </div>
+    </div>
+
+    <!-- FFW31 – May 21–24, 2026 -->
+    <div class="party-card featured" data-status="upcoming" data-date="2026-05-21">
+      <a href="https://ffw31-guide.vercel.app" class="card-img-wrap contain-img" target="_blank" rel="noopener">
+        <img src="https://fetishfactory.com/wp-content/uploads/2025/09/logo-non-crt-scaled.png" alt="Florida Fetish Weekend 31">
+        <div class="date-badge">May 21–24</div>
+        <div class="status-pill upcoming-pill">● Upcoming</div>
+      </a>
+      <div class="card-body">
+        <div class="card-meta">Thu–Sun, May 21–24, 2026 · Memorial Day Weekend</div>
+        <div class="card-title">FFW31</div>
+        <div class="card-subtitle">Florida Fetish Weekend · 31st Anniversary</div>
+        <div class="card-venue">📍 Sheraton Suites Fort Lauderdale · 555 NW 62nd St</div>
+        <div class="card-desc">4 days. 7 parties. 100% fetish hotel takeover. The original kink since 1995 celebrates 31 years with pool parties, open dungeons, and three off-site balls across Fort Lauderdale.</div>
+        <div class="price-row">
+          <span class="price-chip hi">$360 · All Access</span>
+          <span class="price-chip lo">Hotel from $189/night</span>
+          <span class="price-chip lo">4-Night Min</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag tag-red">Strict Dress Code</span>
+          <span class="tag tag-grey">Shuttle Included</span>
+          <span class="tag tag-grey">Creator Suite</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://ffw31-guide.vercel.app" class="btn-outline" target="_blank">Event Guide</a>
+          <a href="https://alteregoeventsllc.ticketspice.com/05-22-26-anniversary-weekend-2026" class="btn-red" target="_blank">🎟 Buy Tickets</a>
+        </div>
+        <a href="mailto:hello@alteregoparty.com?subject=Bottle Service - FFW31" class="btn-bottle">🍾 Reserve Bottle Service</a>
+      </div>
+    </div>
+
+    <!-- JUNE ALTER EGO – Coming Soon -->
+    <div class="party-card" data-status="upcoming" data-date="2026-06-13">
+      <div class="coming-soon-img">
+        <div class="date-badge">Jun 13</div>
+        <div class="status-pill upcoming-pill">● Upcoming</div>
+        <div class="coming-soon-img-icon">🎉</div>
+        <div class="coming-soon-img-label">Image Coming Soon</div>
+      </div>
+      <div class="coming-soon-banner">
+        <span>🎟️</span>
+        <span>Info &amp; Tickets Coming Soon</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">Saturday, June 13, 2026</div>
+        <div class="card-title">Alter Ego</div>
+        <div class="card-subtitle">Monthly Fetish Party · Ft. Lauderdale</div>
+        <div class="card-venue">📍 Venue TBA</div>
+        <div class="card-desc">The monthly Alter Ego Fetish Party returns — every 2nd Saturday. Full details and tickets coming soon.</div>
+        <div class="tag-row">
+          <span class="tag tag-red">Strict Dress Code</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://fetishfactory.com" class="btn-outline" target="_blank">fetishfactory.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAST ────────────────────────────────── -->
+    <div class="section-label" id="label-past">Past Events</div>
+
+    <!-- XFP – March 28, 2026 -->
+    <div class="party-card past" data-status="past" data-date="2026-03-28">
+      <a href="https://fetishfactory.com/xtreme-fetish-party" class="card-img-wrap" target="_blank" rel="noopener">
+        <div class="card-img-placeholder">XFP</div>
+        <div class="date-badge">Mar 28</div>
+        <div class="status-pill past-pill">Past</div>
+      </a>
+      <div class="card-body">
+        <div class="card-meta">Saturday, March 28, 2026 · 10PM – 3AM</div>
+        <div class="card-title">XFP</div>
+        <div class="card-subtitle">Xtreme Fetish Party · Peppermint Hippo</div>
+        <div class="card-venue">📍 1350 SW 2nd St, Pompano Beach</div>
+        <div class="card-desc">An intimate, vetted fetish experience capped at 150 tickets. Vetting required via FetLife, WhatsApp, SDC, or email. DJs Ray Milian &amp; Tumbles.</div>
+        <div class="price-row">
+          <span class="price-chip lo">$30 · Showroom</span>
+          <span class="price-chip lo">$40 · Online</span>
+          <span class="price-chip lo">$50 · Door</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag tag-red">Strict Dress Code</span>
+          <span class="tag tag-grey">Vetted Entry</span>
+          <span class="tag tag-grey">150 Max</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://fetishfactory.com/xtreme-fetish-party" class="btn-outline" target="_blank">More Info</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAUS OF WHACKS – March 14, 2026 -->
+    <div class="party-card past" data-status="past" data-date="2026-03-14">
+      <a href="https://fetishfactory.com/haus-of-whacks/" class="card-img-wrap" target="_blank" rel="noopener">
+        <div class="card-img-placeholder">Haus of Whacks</div>
+        <div class="date-badge">Mar 14</div>
+        <div class="status-pill past-pill">Past</div>
+      </a>
+      <div class="card-body">
+        <div class="card-meta">Saturday, March 14, 2026</div>
+        <div class="card-title">Haus of Whacks</div>
+        <div class="card-subtitle">Fetish Party · Aquaplex FTL</div>
+        <div class="card-venue">📍 1421 E Oakland Park Blvd, Fort Lauderdale</div>
+        <div class="card-desc">Industrial, coldwave, futurepop &amp; aggrotech — hard beats and dark energy inside Aquaplex FTL.</div>
+        <div class="card-actions">
+          <a href="https://fetishfactory.com/haus-of-whacks/" class="btn-outline" target="_blank">More Info</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards-wrap -->
+</div>
+
+<!-- ══ ETIQUETTE PANEL ════════════════════════════════════════ -->
+<div class="panel" id="etiquette">
+  <div class="info-panel">
+    <div class="warn-card" style="margin-top:4px;">
+      <div class="warn-card-icon">⚠️</div>
+      <div class="warn-card-text"><strong>These events are held in public, alcohol-serving nightclubs.</strong> Illegal activities on the street are also illegal inside. Irresponsible behavior can jeopardize the event, venue licenses, and everyone's experience.</div>
+    </div>
+
+    <div class="info-section-label">Behavioral Rules</div>
+    <div class="info-card">
+      <div class="info-card-title">🚫 No Nudity</div>
+      <p>Genitals must remain covered at all times. Women must cover their breasts. Sexy, provocative outfits are highly encouraged — get creative.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🚫 No Sex</div>
+      <p>No vaginal, oral, anal, or any sexual activity. Simulated sexual acts are prohibited. No masturbation or simulated masturbation, including through clothing.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🚫 No Drugs</div>
+      <p>Possession, use, buying, or selling drugs is strictly prohibited. Undercover law enforcement may be present. Violators will face arrest.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🚫 No Weapons</div>
+      <p>No lethal or dangerous weapons — guns, explosives, flame-throwers, or bladed weapons. Edge play and bullwhips strictly banned. Permitted: floggers, paddles, thongs, short single-tails.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🚻 Restrooms</div>
+      <p>Use gendered facilities — men's restroom for men, women's restroom for women. No unisex or mixed use.</p>
+    </div>
+
+    <div class="info-section-label">Play Etiquette</div>
+    <div class="info-card">
+      <div class="info-card-title">✅ Consensual Play Only</div>
+      <p>BDSM activities are encouraged but must be safe, sane, and fully consensual. "Consensual" means asking, understanding, and receiving explicit permission before any activity.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">👁️ Don't Interrupt Scenes</div>
+      <p>Do not physically or verbally interfere with scenes unless invited to participate. Unauthorized participation is disruptive and disrespectful.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🪢 Equipment Sharing</div>
+      <p>Public bondage stations are available for community use. Rotate between stations — don't monopolize equipment. Clean up after yourself and respect the gear for others.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🔥 No Edge Play or Fire Play</div>
+      <p>Knife play, fire play, breath play, and blood play are strictly prohibited — especially with alcohol present. No exceptions.</p>
+    </div>
+
+    <div class="info-section-label">General</div>
+    <div class="info-card">
+      <div class="info-card-title">📸 No Cameras</div>
+      <p>Personal cameras, camera phones, and recording devices are prohibited. Violations result in confiscation and removal without refund. Authorized photographers wear visible photo passes. You may request not to be photographed — they will honor it.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">👗 Obey the Dress Code</div>
+      <p>Non-compliance results in denial of entry with no refund. Creative, elaborate outfits are encouraged. Visit the Fetish Factory Showroom (855 E Oakland Park Blvd) for gear and styling help.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">🧠 Use Common Sense</div>
+      <p>Maintain respect for the event, the venue, and every attendee. Don't touch others without consent. Don't be disruptive. "Use common sense and don't be a dick!"</p>
+    </div>
   </div>
 </div>
 
-<div class="cards-wrap">
+<!-- ══ FAQ PANEL ══════════════════════════════════════════════ -->
+<div class="panel" id="faq">
+  <div class="info-panel">
 
-  <!-- ── UPCOMING ────────────────────────────── -->
-  <div class="section-label" id="label-upcoming">Upcoming</div>
+    <div class="info-section-label" style="margin-top:4px;">Tickets &amp; Will-Call</div>
+    <div class="faq-item"><button class="faq-q">How do I get tickets? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Purchase in-store at the Fetish Factory Showroom (cash only, 10% discount on other items that day), online via the store, or at the door (higher price). Online sales close at 5PM on party day for monthly events.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Will my tickets be shipped to me? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>No. Fetish Factory will NEVER ship tickets of any kind under any circumstances.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How do I pick up my tickets? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>The original cardholder must present a valid photo ID matching the ticket order name and the credit card used. Tickets are available at will-call on event day at the club entrance. Florida Fetish Weekend has separate will-call dates and locations.</p></div></div>
+    <div class="faq-item"><button class="faq-q">What if the cardholder can't pick them up? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Tickets are only released to the person who bought them — no exceptions. We recommend requesting a cancellation/refund and repurchasing under the attendee's name.</p></div></div>
+    <div class="faq-item"><button class="faq-q">I bought tickets in-store and lost them. Can I still attend? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Unfortunately our physical ticketing policy requires that tickets be in-hand. Lost tickets require repurchase.</p></div></div>
+    <div class="faq-item"><button class="faq-q">What is the online processing fee? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>$2.50 per ticket for online purchases.</p></div></div>
 
-  <!-- BLASFFEMY – April 11, 2026 -->
-  <div class="party-card featured" data-status="upcoming" data-date="2026-04-11">
-    <a href="https://fetishfactory.com/blasffemy-april-11-2026/" class="card-img-wrap" target="_blank" rel="noopener">
-      <img src="https://fetishfactory.com/wp-content/uploads/2026/03/BLASFFEMY2026_slider1200x600_DAN.png" alt="BLASFFEMY 2026">
-      <div class="date-badge">Apr 11</div>
-      <div class="status-pill soon" id="blasffemy-pill">● Soon</div>
-    </a>
-    <div class="card-body">
-      <div class="card-meta">Saturday, April 11, 2026 · 10PM – 3AM</div>
-      <div class="card-title">BLASFFEMY</div>
-      <div class="card-subtitle">Fetish Party · Aquaplex FTL</div>
-      <div class="card-venue">📍 1421 E Oakland Park Blvd, Fort Lauderdale</div>
-      <div class="card-desc">The un-sacred church rises again — a night of dark energy, bold expression, and immersive atmosphere. DJs Ray Milian, Sideshow &amp; Jorg Barr. Performers: Lyra Angels &amp; Foxxy Lane LeFevre.</div>
-      <div class="price-row">
-        <span class="price-chip hi">$25 · Showroom</span>
-        <span class="price-chip hi">$35 · Online</span>
-        <span class="price-chip lo">$40 · Door</span>
-      </div>
-      <div class="tag-row">
-        <span class="tag tag-red">Strict Dress Code</span>
-        <span class="tag tag-white">Bottle Service</span>
-        <span class="tag tag-white">Scene Security</span>
-      </div>
-      <div class="card-actions">
-        <a href="https://fetishfactory.com/blasffemy-april-11-2026/" class="btn-outline" target="_blank">More Info</a>
-        <a href="https://alteregoeventsllc.ticketspice.com/04-11-2026-blasffemy-alter-ego-party" class="btn-neon" target="_blank">🎟 Buy Tickets</a>
-      </div>
+    <div class="info-section-label">Dress Code</div>
+    <div class="faq-item"><button class="faq-q">What's the dress code? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Strict dress code required. Encouraged: Latex · Vinyl · Cyber Goth · Cyber Punk · Tech Wear · Raver · Burner · Kinky Drag · Cyber Erotica · Animal Persona · Bondage · Kinky Lingerie · Nu Goth · Cosplay. NO jeans, all-black streetwear, or running shoes.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Why is there a dress code? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>It creates a level playing field so attendees don't feel out of place wearing fetish fashion, ensures everyone is part of the scene intentionally, and provides discretion if you encounter acquaintances.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is nudity allowed? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>No. Full nudity is prohibited by all venues. Genitals of both men and women must be totally covered. Women's nipples and areola must also be covered in public areas.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is there a coat check? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes — $2 coat and bag check, typically located near the venue entrance.</p></div></div>
+
+    <div class="info-section-label">At the Party</div>
+    <div class="faq-item"><button class="faq-q">Is bottle service available? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes, table reservations with bottle service are available at most events. Email <a href="mailto:hello@alteregoparty.com?subject=Bottle Service Inquiry">hello@alteregoparty.com</a> with your party size and drink preferences.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Are these parties similar to a dungeon? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Parties feature alcohol (dungeons don't). Less protocol-based, more fashion-focused. No dungeon masters — everything must be safe and consensual, and equipment is shared.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How do I identify staff at events? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Staff wear all-black non-fetish wear with "STAFF" shirts. They're stationed near bathrooms, booths, and doors, and walk the floor throughout the night. Don't hesitate to flag them — they'd rather be made aware of something and have it be nothing than miss a real issue.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is photography allowed? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>No personal cameras, camera phones, or recording devices. Only authorized photographers wearing visible photo passes may shoot. You can request not to be photographed — they will honor it.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Is there a lost and found? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Give found items to staff at the event or drop them at the Fetish Factory Showroom the next morning. If you lost something, call the store the next day and email <a href="mailto:Glenn@fetishfactory.com">Glenn@fetishfactory.com</a> with a description.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How do I view party photo galleries? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Galleries are posted on fetishfactory.com and require a free Fetish Factory account. Galleries can take up to two weeks to process after the event.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How do I get a photo removed from the gallery? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Email <a href="mailto:Glenn@fetishfactory.com">Glenn@fetishfactory.com</a> and CC <a href="mailto:Graphics@fetishfactory.com">Graphics@fetishfactory.com</a> with the direct photo link and a verification ID. They will remove it promptly.</p></div></div>
+
+    <div class="info-section-label">Discounts &amp; Memberships</div>
+    <div class="faq-item"><button class="faq-q">Is there an SDC member discount? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes — SDC members receive a 10% discount on in-store purchases at the Fetish Factory Showroom. Must be wearing your official SDC bracelet at time of purchase.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Does Fetish Factory have a loyalty program? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes — currently available for in-store customers. Online integration is in development.</p></div></div>
+
+    <div class="info-section-label">Contact</div>
+    <div class="info-card">
+      <div class="info-card-title">📞 Get In Touch</div>
+      <p><strong>Showroom:</strong> (954) 563-5777</p>
+      <p><strong>Website:</strong> fetishfactory.com</p>
+      <p><strong>General:</strong> info@fetishfactory.com</p>
+      <p><strong>Events / Bottle Service:</strong> hello@alteregoparty.com</p>
     </div>
+    <a href="mailto:hello@alteregoparty.com?subject=Bottle Service Inquiry" class="btn-bottle" style="margin:0 0 8px;">🍾 Reserve Bottle Service</a>
+
   </div>
-
-  <!-- FFW31 – May 21–24, 2026 -->
-  <div class="party-card featured" data-status="upcoming" data-date="2026-05-21">
-    <a href="https://ffw31-guide.vercel.app" class="card-img-wrap contain-img" target="_blank" rel="noopener">
-      <img src="https://fetishfactory.com/wp-content/uploads/2025/09/logo-non-crt-scaled.png" alt="Florida Fetish Weekend 31">
-      <div class="date-badge">May 21–24</div>
-      <div class="status-pill upcoming-pill">● Upcoming</div>
-    </a>
-    <div class="card-body">
-      <div class="card-meta">Thu–Sun, May 21–24, 2026 · Memorial Day Weekend</div>
-      <div class="card-title">FFW31</div>
-      <div class="card-subtitle">Florida Fetish Weekend · 31st Anniversary</div>
-      <div class="card-venue">📍 Sheraton Suites Fort Lauderdale · 555 NW 62nd St</div>
-      <div class="card-desc">4 days. 7 parties. 100% fetish hotel takeover. The original kink since 1995 celebrates 31 years with pool parties, open dungeons, and three off-site balls across Fort Lauderdale.</div>
-      <div class="price-row">
-        <span class="price-chip hi">$360 · All Access</span>
-        <span class="price-chip lo">Hotel from $189/night</span>
-        <span class="price-chip lo">4-Night Min</span>
-      </div>
-      <div class="tag-row">
-        <span class="tag tag-red">Strict Dress Code</span>
-        <span class="tag tag-white">Shuttle Included</span>
-        <span class="tag tag-white">Creator Suite</span>
-      </div>
-      <div class="card-actions">
-        <a href="https://ffw31-guide.vercel.app" class="btn-outline" target="_blank">Event Guide</a>
-        <a href="https://alteregoeventsllc.ticketspice.com/05-22-26-anniversary-weekend-2026" class="btn-neon" target="_blank">🎟 Buy Tickets</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PAST ────────────────────────────────── -->
-  <div class="section-label" id="label-past">Past Events</div>
-
-  <!-- XFP – March 28, 2026 -->
-  <div class="party-card past" data-status="past" data-date="2026-03-28">
-    <a href="https://fetishfactory.com/xtreme-fetish-party" class="card-img-wrap" target="_blank" rel="noopener">
-      <div class="card-img-placeholder">XFP</div>
-      <div class="date-badge">Mar 28</div>
-      <div class="status-pill past-pill">Past</div>
-    </a>
-    <div class="card-body">
-      <div class="card-meta">Saturday, March 28, 2026 · 10PM – 3AM</div>
-      <div class="card-title">XFP</div>
-      <div class="card-subtitle">Xtreme Fetish Party · Peppermint Hippo</div>
-      <div class="card-venue">📍 1350 SW 2nd St, Pompano Beach</div>
-      <div class="card-desc">An intimate, vetted fetish experience capped at 150 tickets. Vetting required via FetLife, WhatsApp, SDC, or email. DJs Ray Milian &amp; Tumbles.</div>
-      <div class="price-row">
-        <span class="price-chip lo">$30 · Showroom</span>
-        <span class="price-chip lo">$40 · Online</span>
-        <span class="price-chip lo">$50 · Door</span>
-      </div>
-      <div class="tag-row">
-        <span class="tag tag-red">Strict Dress Code</span>
-        <span class="tag tag-white">Vetted Entry</span>
-        <span class="tag tag-white">150 Max</span>
-      </div>
-      <div class="card-actions">
-        <a href="https://fetishfactory.com/xtreme-fetish-party" class="btn-outline" target="_blank">More Info</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HAUS OF WHACKS – March 14, 2026 -->
-  <div class="party-card past" data-status="past" data-date="2026-03-14">
-    <a href="https://fetishfactory.com/haus-of-whacks/" class="card-img-wrap" target="_blank" rel="noopener">
-      <div class="card-img-placeholder">Haus of Whacks</div>
-      <div class="date-badge">Mar 14</div>
-      <div class="status-pill past-pill">Past</div>
-    </a>
-    <div class="card-body">
-      <div class="card-meta">Saturday, March 14, 2026</div>
-      <div class="card-title">Haus of Whacks</div>
-      <div class="card-subtitle">Fetish Party · Aquaplex FTL</div>
-      <div class="card-venue">📍 1421 E Oakland Park Blvd, Fort Lauderdale</div>
-      <div class="card-desc">Industrial, coldwave, futurepop &amp; aggrotech — hard beats and dark energy inside Aquaplex FTL.</div>
-      <div class="card-actions">
-        <a href="https://fetishfactory.com/haus-of-whacks/" class="btn-outline" target="_blank">More Info</a>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /cards-wrap -->
+</div>
 
 <!-- FOOTER -->
 <div class="footer">
@@ -254,7 +455,17 @@
 </div>
 
 <script>
-  // Filter
+  // Tab navigation
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Filter (Events panel)
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -288,6 +499,11 @@
       pill.textContent = '● Upcoming';
     }
   })();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
 </script>
 </body>
 </html>
