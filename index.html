@@ -174,6 +174,19 @@
 <!-- ══ EVENTS PANEL ══════════════════════════════════════════ -->
 <div class="panel active" id="events">
 
+  <!-- YouTube promo video — hidden after event starts -->
+  <div id="promo-video" style="padding:16px 16px 0;">
+    <div style="position:relative;width:100%;max-width:360px;margin:0 auto;aspect-ratio:9/16;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.12);border:1px solid var(--card-border);">
+      <iframe
+        src="https://www.youtube.com/embed/3fh2-lHTReg?rel=0&modestbranding=1"
+        title="Fetish Factory — BLASFFEMY"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
+      </iframe>
+    </div>
+  </div>
+
   <!-- Monthly note -->
   <div class="monthly-note" style="margin-top:16px;">
     <div class="monthly-note-icon">🏆</div>
@@ -474,6 +487,15 @@
     } else {
       pill.className = 'status-pill upcoming-pill';
       pill.textContent = '● Upcoming';
+    }
+  })();
+
+  // Hide promo video after BLASFFEMY starts (Apr 11 2026, 10PM ET)
+  (function() {
+    const eventStart = new Date('2026-04-11T22:00:00-04:00');
+    if (new Date() >= eventStart) {
+      const v = document.getElementById('promo-video');
+      if (v) v.style.display = 'none';
     }
   })();
 
