@@ -166,13 +166,35 @@
 
 <!-- TABS -->
 <div class="tabs">
-  <button class="tab active" data-tab="events">Events</button>
+  <button class="tab active" data-tab="home">Home</button>
+  <button class="tab" data-tab="events">Events</button>
   <button class="tab" data-tab="etiquette">Etiquette</button>
   <button class="tab" data-tab="faq">FAQ</button>
 </div>
 
+<!-- ══ HOME PANEL ════════════════════════════════════════════ -->
+<div class="panel active" id="home">
+  <div style="padding:20px 16px 32px;">
+    <div style="margin-bottom:20px;">
+      <video src="https://4puya0crkskfzrku.public.blob.vercel-storage.com/C61B4173-257F-4F74-AAA8-E8FC4627DA70.MP4"
+             autoplay muted loop playsinline controls
+             style="width:100%;border-radius:16px;display:block;"
+             onerror="this.parentElement.style.display='none'"></video>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:4px;color:var(--text-dim);margin-bottom:10px;">by Fetish Factory</div>
+      <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:52px;text-transform:uppercase;color:var(--text);line-height:1;margin-bottom:6px;letter-spacing:1px;">ALTER<span style="color:var(--red);">EGO</span></div>
+      <div style="width:48px;height:3px;background:var(--red);margin:14px auto 18px;border-radius:2px;"></div>
+      <div style="font-family:'Barlow',sans-serif;font-weight:500;font-size:15px;color:var(--text);line-height:1.5;margin-bottom:8px;">The Longest Running Strict Dress Code<br>Fetish Party in the US</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--text-dim);margin-bottom:28px;">Monthly Events · South Florida</div>
+      <a href="#" onclick="document.querySelector('[data-tab=events]').click();return false;"
+         style="display:inline-block;background:var(--red);color:#ffffff;font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:2px;padding:14px 36px;border-radius:10px;text-decoration:none;">View Events</a>
+    </div>
+  </div>
+</div>
+
 <!-- ══ EVENTS PANEL ══════════════════════════════════════════ -->
-<div class="panel active" id="events">
+<div class="panel" id="events">
 
   <!-- Monthly note -->
   <div class="monthly-note" style="margin-top:16px;">
