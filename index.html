@@ -22,6 +22,10 @@
 
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body { font-family:'Barlow',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+  @media (min-width:480px) {
+    html { background:#000; }
+    body { max-width:430px; margin:0 auto; box-shadow:0 0 80px rgba(0,0,0,0.8); min-height:100vh; }
+  }
 
   /* HEADER */
   .header { position:sticky; top:0; z-index:100; background:rgba(10,10,10,0.97); backdrop-filter:blur(20px); border-bottom:2px solid var(--red); padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
